@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-0 p-0 box-border text-base;
+  }
+}
+
+@layer components {
+  button {
+    @apply border-black border-2 text-2xl font-medium px-6 py-2 h-14 rounded-lg w-full select-none;
+  }
+
+  button.censor {
+    @apply border-red-600 text-red-600;
+  }
+
+  button.valid {
+    @apply border-green-600 text-green-600;
+  }
+}
