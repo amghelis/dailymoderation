@@ -8,6 +8,22 @@ import { GET_NEXT_TASK } from '../graphql/queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { CENSOR_MEDIA, VALIDATE_MEDIA } from '../graphql/mutations';
 
+/**
+ * Custom hook for managing media moderation.
+ *
+ * This hook integrates with GraphQL for data fetching and mutations,
+ * Redux for state management, and a REST API for additional media title retrieval.
+ * It provides functionality for skipping, censoring, and validating media.
+ *
+ * @returns {Object} An object containing the following properties:
+ *   - media: The current media object from the Redux state, containing media details.
+ *   - moderationStatus: The current status of media moderation, such as 'idle', 'skipping', 'censoring', 'validating'.
+ *   - moderationReason: The reason for the current moderation action, if any.
+ *   - skip: Function to skip the current media and fetch the next media.
+ *   - censor: Function to censor the current media.
+ *   - validate: Function to validate the current media.
+ *
+ */
 const useMediaModeration = () => {
   const { data, refetch } = useQuery(GET_NEXT_TASK);
 
@@ -17,6 +33,7 @@ const useMediaModeration = () => {
   const mediaState = useAppSelector((state) => state.media);
   const mediaDispatch = useAppDispatch();
 
+  // Effect to fetch additional media information when new data is received from GET_NEXT_TASK query
   useEffect(() => {
     if (
       data &&
@@ -45,6 +62,7 @@ const useMediaModeration = () => {
     }
   }, [data, mediaDispatch]);
 
+  // Function to handle action timeout with a toast message
   const _runActionTimeout = (errorMessage: string) => {
     return setTimeout(() => {
       toast.error(errorMessage);
@@ -52,13 +70,16 @@ const useMediaModeration = () => {
     }, MEDIA_ACTION_TIMEOUT);
   };
 
+  // Function to reset the action timeout and moderation status
   const _resetTimeoutAndStatus = (timeout: NodeJS.Timeout) => {
     clearTimeout(timeout);
     mediaDispatch(actions.setModerationStatus('idle'));
   };
 
+  // Function to reset moderation reason
   const _resetReason = () => mediaDispatch(actions.setModerationReason(''));
 
+  // Function to skip to the next media.
   const skip = () => {
     mediaDispatch(actions.setModerationStatus('skipping'));
     const timeout = _runActionTimeout(
@@ -66,6 +87,7 @@ const useMediaModeration = () => {
     );
     refetch()
       .then(() => {
+        // Reset timeout and status on successful refetch
         _resetTimeoutAndStatus(timeout);
       })
       .catch(() => {
@@ -74,6 +96,7 @@ const useMediaModeration = () => {
       });
   };
 
+  // Function to censor the current media and skip to the next media.
   const censor = () => {
     mediaDispatch(actions.setModerationStatus('censoring'));
     const timeout = _runActionTimeout(
@@ -96,6 +119,7 @@ const useMediaModeration = () => {
       });
   };
 
+  // Function to validate the current media and skip to the next media.
   const validate = () => {
     mediaDispatch(actions.setModerationStatus('validating'));
     const timeout = _runActionTimeout(
