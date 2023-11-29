@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ArrowSpinner from '../loader/ArrowSpinner';
+import ArrowSpinner from '../animation/ArrowSpinner';
 
 type ThumbnailProps = {
   thumbnailURL: string;
@@ -13,6 +13,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({ thumbnailURL }) => {
       {isLoading && <ArrowSpinner />}
       <img
         src={thumbnailURL}
+        draggable={false}
         onLoad={() => setIsloading(false)}
         className="w-full aspect-video object-cover rounded-lg max-w-md"
         style={{ display: isLoading ? 'none' : 'block' }}

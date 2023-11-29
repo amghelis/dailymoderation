@@ -30,10 +30,14 @@ const MediaContainer: React.FC<MediaContainerProps> = ({
         width={'auto'}
         height={'600'}
         allowFullScreen
-        allow="autoplay"
       ></iframe>
       <h1 className="text-4xl font-medium">{title}</h1>
       {description && <p className="max-w-4xl">{description}</p>}
+      {!description && (
+        <p className="max-w-4xl italic text-gray-700">
+          This media has no description
+        </p>
+      )}
     </div>
   );
 };

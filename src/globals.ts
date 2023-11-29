@@ -8,6 +8,7 @@ export type Channel = {
 
 export type Media = {
   id: string;
+  title: string;
   category: string;
   channel: Channel;
   description?: string;
@@ -16,32 +17,10 @@ export type Media = {
   url: string;
 };
 
-export type MediaReducerState = {
+export type MediaState = {
   media: Media;
   moderationStatus: ModerationStatus;
+  moderationReason: string;
 };
 
-export const mediaStateInitalState: MediaReducerState = {
-  media: {
-    category: '',
-    channel: {
-      id: '',
-      name: '',
-    },
-    embedURL: '',
-    id: '',
-    thumbnailURL: '',
-    url: '',
-    description: '',
-  },
-  moderationStatus: 'idle',
-};
-
-export type MediaAction = {
-  type: 'setMedia' | 'setStatus';
-  value: Media | ModerationStatus;
-};
-
-export const mediaRestApiURL = (mediaId: string) => {
-  return `https://api.dailymotion.com/video/${mediaId}?fields=title`;
-};
+export const MEDIA_ACTION_TIMEOUT = 5000;

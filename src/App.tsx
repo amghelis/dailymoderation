@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import client from './graphql/client';
 import MainLayout from './layout/MainLayout';
 import ModerationPage from './pages/moderation/Moderation';
@@ -21,9 +23,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </Provider>
   );
 }
 

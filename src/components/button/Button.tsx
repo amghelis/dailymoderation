@@ -1,4 +1,4 @@
-import ArrowSpinner from '../loader/ArrowSpinner';
+import ArrowSpinner from '../animation/ArrowSpinner';
 
 type ButtonProps = {
   type: 'censor' | 'valid' | 'skip';
