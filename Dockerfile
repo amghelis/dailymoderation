@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:20.10.0-alpine3.18
 
 ARG MODE='prod'
 ENV MODE_ENV=${MODE}

@@ -1,0 +1,57 @@
+type Query {
+  moderation: Moderation
+}
+
+type Moderation {
+  """
+   Fetch next task for moderator, fetched task will be locked for a short period
+  """
+  nextTask: ModerationMediaTask
+}
+
+type ModerationMediaTask {
+  """
+  The media to be moderated
+  """
+  media: Media!
+}
+
+
+"""A media object represents a Dailymotion video."""
+type Media {
+    """The unique id that Dailymotion uses to identify the media."""
+    id: String!
+
+    """The URL of the thumbnail image."""
+    thumbnailURL: String!
+
+    """The category of the media."""
+    category: String!
+
+    """The channel that created the media."""
+    channel: Channel!
+
+    """
+    The description of the media in utf8. Clients are expected to handle '<br/>'
+    tags and detect 'http(s)://' links. No other HTML tag should be present.
+    """
+    description: String
+
+    """The URL of the embed video."""
+    embedURL: String!
+
+    """The URL of the media."""
+    url: String!
+}
+
+"""A channel object contains information about a Dailymotion channel."""
+type Channel {
+  """The unique id that Dailymotion uses to identify the channel."""
+  id: String!
+
+  """The description of the channel."""
+  description: String
+
+  """The name of the channel."""
+  name: String!
+}

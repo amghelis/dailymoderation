@@ -1,0 +1,28 @@
+enum MutationStatus {
+  """An error occurred during the mutation."""
+  ERROR
+
+  """Mutation succeeded."""
+  SUCCESS
+}
+
+type Mutation {
+  """Mark the media as censored"""
+  mediaCensor(input: MediaInput!): MediaActionPayload
+
+  """Makr the media as valid"""
+  mediaValid(input: MediaInput!): MediaActionPayload
+}
+
+input MediaInput {
+  clientMutationId: String
+
+  id: String!
+
+  reason: String!
+}
+
+type MediaActionPayload {
+    clientMutationId: String
+    status: MutationStatus
+}
