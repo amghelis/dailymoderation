@@ -16,7 +16,7 @@ This tool makes use of a GraphQL API which has been provided in the technical te
 
 ## How to run with Docker
 
-The build and run process have been tested using **Docker version 24.0.6**
+The build and run process has been tested using **Docker version 24.0.6**
 
 ### Production environment
 
@@ -44,7 +44,7 @@ make clean
 
 ## How to run with NPM
 
-The run process have been tested using **node v18.18.2** and **npm v9.8.1**
+The run process has been tested using **node v18.18.2** and **npm v9.8.1**
 
 ### Building for production
 
