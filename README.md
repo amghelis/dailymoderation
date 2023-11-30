@@ -104,7 +104,7 @@ It would have been too much overloaded if all the hooks (Redux's hooks, Apollo's
 ### Unit tests
 
 I have always been taught that unit tests and test driven developments are a must-have in the software engineering field. This is why I have tried to implements several unit tests available inside the [test](src/__test__/) folder.  
-I have been able to succesfully implement simple test but I have encoutered difficulties when trying to implement mocks for testing the [useMediaModeration](src/hooks/useMediaModeration.tsx) custom hook.
+I have been able to succesfully implement simple tests and mocks for testing the [useMediaModeration](src/hooks/useMediaModeration.tsx) custom hook.
 
 ## Thanks
 
